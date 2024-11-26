@@ -21,7 +21,7 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
 
     // Input Volume
     InputVolume.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag); //LinearVertical
-    InputVolume.setRange (0.0, 10.0, 0.02);;
+    InputVolume.setRange (0.0, 10.0, 0.02);
     InputVolume.setTextBoxStyle(juce::Slider::TextBoxAbove, false, 150, 20);
     InputVolume.setPopupDisplayEnabled(true, false, this);
     InputVolume.setTextValueSuffix(" Drive");

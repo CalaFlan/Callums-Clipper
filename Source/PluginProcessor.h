@@ -12,6 +12,7 @@
 
 //==============================================================================
 /**
+* testing commiting changes to github
 */
 class BasicClippingAudioProcessor  : public juce::AudioProcessor
 {
