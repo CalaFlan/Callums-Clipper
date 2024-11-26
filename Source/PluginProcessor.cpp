@@ -173,7 +173,8 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
     // interleaved by keeping the same state.
 
     // Selector
-    
+    distortionType = 1;
+
     // Bypass
     if (bypassEnabled)
     {
@@ -226,6 +227,30 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                     }
                         
 
+                    // 1/3 - 2/3
+                    if (abs(channelData[sample]) >= 0.333333 && (abs(channelData[sample]) < 0.66666))
+                    {
+                        if (channelData[sample] > 0)
+                        {
+                            channelData[sample] = (3 - pow((2 - channelData[sample] + channelData[sample] + channelData[sample]), 2)) / 3;
+                        }
+                        if (channelData[sample] < 0)
+                        {//needs an abs?
+                            channelData[sample] = (3 - pow((2 - abs(channelData[sample]) + abs(channelData[sample]) + abs(channelData[sample])), 2)) / 3;
+                        }
+                    }
+                    if (abs(channelData[sample]) >= .666666)
+                    {
+                        if (channelData[sample] > 0) 
+                        { 
+                            channelData[sample] = 1;
+                        }
+                        if (channelData[sample] < 0) 
+                        {
+                            channelData[sample] = -1;
+                        }
+                    }
+                }
                 // Broken Soft Clip
                 else if (distortionType == 2)
                 {
@@ -298,4 +323,3 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new BasicClippingAudioProcessor();
 }
-
