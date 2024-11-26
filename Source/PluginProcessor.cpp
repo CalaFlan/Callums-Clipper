@@ -201,37 +201,30 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                     }
                 }
 
-                //  Soft Clip
-                //else if (distortionType == 1)             
-                //{
-                //    // 0 - 1/3 = 2x
-                //    if (abs(channelData[sample]) < .333)
-                //    {
-                //        channelData[sample] = 2 * channelData[sample];
-                //    }
-                //    else if (abs(channelData[sample]) >= .333 && abs(channelData[sample]) <= .666) // 1/3 - 2/3 = (3-(2-3x)^2)/3
-                //    {
-                //        if (channelData[sample] > 0)
-                //        { 
-                //            channelData[sample] = (3 - (2 - abs(channelData[sample]) * 3) * (2 - abs(channelData[sample]) * 3) / 3);
-                //        }
-                //        else if (channelData[sample] < 0)
-                //        {
-                //            channelData[sample] = -(3 - (2 - abs(channelData[sample]) * 3)* (2 - abs(channelData[sample]) * 3) / 3);
-                //        }
-                //    }
-                //    else if (abs(channelData[sample]) > .666)                // 2/3 - 1 = 1
-                //    {
-                //        if (channelData[sample] > 0)
-                //        {
-                //            channelData[sample] = 1;
-                //        }
-                //        else if (channelData[sample] < 0)
-                //        {
-                //            channelData[sample] = -1;
-                //        }
-                //    }
-                //}
+                // Soft Clip
+                else if (distortionType == 1)
+                {
+                    // 0 - 1/3 = 2x*/
+                    // causes overflow i think
+                    if (abs(channelData[sample]) < 0.333 )
+                    {
+                        // Check for overflow issues
+                        if (std::numeric_limits<double>::max() - std::abs(channelData[sample]))
+                        {
+                            if (channelData[sample] > 0)
+                            {
+                                channelData[sample] = 1;
+                            }
+                            if (channelData[sample] < 0)
+                            {
+                                channelData[sample] = -1;
+                            }
+                        }else
+                        { channelData[sample] = channelData[sample] * 2; }
+
+
+                    }
+                        
 
                 // Broken Soft Clip
                 else if (distortionType == 2)
