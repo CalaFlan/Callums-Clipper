@@ -63,6 +63,17 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
     addAndMakeVisible(&OutputVolume);
     OutputVolume.addListener(this);
 
+    // Type buttons
+    TypeDecrementButton.setButtonText("<");
+    TypeDecrementButton.setBounds(30, 250, 30, 30);
+    addAndMakeVisible(&TypeDecrementButton);
+
+
+    TypeIncrementButton.setButtonText(">");
+    TypeIncrementButton.setBounds(310, 250, 30, 30);
+    addAndMakeVisible(&TypeIncrementButton);
+
+
     // Metering
     startTimerHz(24);
     addAndMakeVisible(verticalMeterL);

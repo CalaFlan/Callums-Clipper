@@ -39,8 +39,9 @@ private:
     juce::Slider ThresholdSlider;
     juce::ToggleButton BypassToggle; 
 
-    //hello
-
+    // button
+    juce::TextButton TypeIncrementButton;
+    juce::TextButton TypeDecrementButton;
     // Metering
     Gui::VerticalMeter verticalMeterL, verticalMeterR;
 
