@@ -18,7 +18,6 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
     // editor's size to whatever you need it to be.
     setSize (600, 300);
 
-
     // Input Volume
     InputVolume.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag); //LinearVertical
     InputVolume.setRange (0.0, 10.0, 0.02);
@@ -27,7 +26,9 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
     InputVolume.setTextValueSuffix(" Drive");
     InputVolume.setValue(1.0);
     InputVolume.setBounds(10, 10, 150, 150);
-
+    InputVolume.setColour(0x1001300, juce::Colours::orange); // Set knob Colour
+    InputVolume.setColour(0x1001400, juce::Colours::black); // Set knob Colour
+    InputVolume.setColour(0x1001700, juce::Colours::lightgrey); // Set knob Colour
     addAndMakeVisible(&InputVolume);
     InputVolume.addListener(this);
 
@@ -40,6 +41,9 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
     //ThresholdSlider.setSkewFactorFromMidPoint(.5);
     ThresholdSlider.setValue(.7);
     ThresholdSlider.setBounds(110, 110,150,150);
+    ThresholdSlider.setColour(0x1001300, juce::Colours::green); // Set knob Colour
+    ThresholdSlider.setColour(0x1001400, juce::Colours::black); // Set knob Colour
+    ThresholdSlider.setColour(0x1001700, juce::Colours::lightgrey); // Set knob Colour
 
     addAndMakeVisible(&ThresholdSlider);
     ThresholdSlider.addListener(this);
@@ -52,6 +56,9 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
     OutputVolume.setTextValueSuffix(" Output Volume");
     OutputVolume.setValue(1.0);
     OutputVolume.setBounds(210, 10, 150, 150);
+    OutputVolume.setColour(0x1001300, juce::Colours::cadetblue); // Set knob Colour
+    OutputVolume.setColour(0x1001400, juce::Colours::black); // Set knob Colour
+    OutputVolume.setColour(0x1001700, juce::Colours::lightgrey); // Set knob Colour
 
     addAndMakeVisible(&OutputVolume);
     OutputVolume.addListener(this);
@@ -70,10 +77,10 @@ BasicClippingAudioProcessorEditor::~BasicClippingAudioProcessorEditor()
 void BasicClippingAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // fill the whole window white
-    g.fillAll(juce::Colours::black);
+    g.fillAll(juce::Colours::lightgrey);
 
     // set the current drawing colour to black
-    g.setColour(juce::Colours::black);
+    g.setColour(juce::Colours::lightgrey);
 
     // set the font size and draw text to the screen
     g.setFont(15.0f);
