@@ -174,6 +174,7 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
 
     // Selector
     distortionType = 1;
+    float outputSample;
 
     // Bypass
     if (bypassEnabled)
@@ -187,6 +188,8 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
             {
                 // Input Gain
                 channelData[sample] = channelData[sample] * inputGain;
+
+                outputSample = channelData[sample];
 
                 // Distortion algos
                 // Hard Clip
@@ -207,49 +210,34 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                 {
                     // 0 - 1/3 = 2x*/
                     // causes overflow i think
-                    if (abs(channelData[sample]) < 0.333 )
+                    if (abs(channelData[sample]) < 1.f/3.f)
                     {
-                        // Check for overflow issues
-                        if (std::numeric_limits<double>::max() - std::abs(channelData[sample]))
-                        {
-                            if (channelData[sample] > 0)
-                            {
-                                channelData[sample] = 1;
-                            }
-                            if (channelData[sample] < 0)
-                            {
-                                channelData[sample] = -1;
-                            }
-                        }else
-                        { channelData[sample] = channelData[sample] * 2; }
-
-
+                         outputSample = channelData[sample] * 2.f;
                     }
-                        
-
                     // 1/3 - 2/3
-                    if (abs(channelData[sample]) >= 0.333333 && (abs(channelData[sample]) < 0.66666))
+                    if (abs(channelData[sample]) < 2.f / 3.f)
                     {
                         if (channelData[sample] > 0)
                         {
-                            channelData[sample] = (3 - pow((2 - channelData[sample] + channelData[sample] + channelData[sample]), 2)) / 3;
+                            outputSample = 3 - pow(2 - channelData[sample] * 3, 2) / 3;
                         }
                         if (channelData[sample] < 0)
-                        {//needs an abs?
-                            channelData[sample] = (3 - pow((2 - abs(channelData[sample]) + abs(channelData[sample]) + abs(channelData[sample])), 2)) / 3;
+                        {
+                            outputSample = 0-(3 - pow(2 - channelData[sample] * 3, 2) / 3);
                         }
                     }
-                    if (abs(channelData[sample]) >= .666666)
+                    if(abs(channelData[sample])> 2.f/3.f)
                     {
                         if (channelData[sample] > 0) 
                         { 
-                            channelData[sample] = 1;
+                            outputSample = 1;
                         }
                         if (channelData[sample] < 0) 
                         {
-                            channelData[sample] = -1;
+                            outputSample = -1;
                         }
                     }
+                    channelData[sample] = outputSample;
                 }
                 // Broken Soft Clip
                 else if (distortionType == 2)
@@ -263,6 +251,9 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                         channelData[sample] = threshold * 1.5 * (channelData[sample] + (channelData[sample] * channelData[sample] * channelData[sample]) / 3);
                     }
                 }
+
+                //
+                
 
                 // Rectifier
                 else if (distortionType == 3)
