@@ -208,36 +208,28 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                 // Soft Clip
                 else if (distortionType == 1)
                 {
-                    // 0 - 1/3 = 2x*/
-                    // causes overflow i think
-                    if (abs(channelData[sample]) < 1.f/3.f)
-                    {
-                         outputSample = channelData[sample] * 2.f;
-                    }
-                    // 1/3 - 2/3
-                    if (abs(channelData[sample]) < 2.f / 3.f)
-                    {
-                        if (channelData[sample] > 0)
-                        {
-                            outputSample = 3 - pow(2 - channelData[sample] * 3, 2) / 3;
+                    double th = 1.0 / 3.0; // threshold for symmetrical soft clipping
+
+                        if (abs(channelData[sample]) < th) {
+                            outputSample = 2 * channelData[sample];
                         }
-                        if (channelData[sample] < 0)
-                        {
-                            outputSample = 0-(3 - pow(2 - channelData[sample] * 3, 2) / 3);
+                        else if (abs(channelData[sample]) >= th) {
+                            if (channelData[sample] > 0) {
+                                outputSample = (3 - pow(2 - channelData[sample] * 3, 2)) / 3;
+                            }
+                            else {
+                                outputSample = -(3 -pow(2 - abs(channelData[sample]) * 3, 2)) / 3;
+                            }
                         }
-                    }
-                    if(abs(channelData[sample])> 2.f/3.f)
-                    {
-                        if (channelData[sample] > 0) 
-                        { 
-                            outputSample = 1;
+                        if (abs(channelData[sample]) > 2 * th) {
+                            if (channelData[sample] > 0) {
+                                outputSample = 1;
+                            }
+                            else {
+                                outputSample = -1;
+                            }
                         }
-                        if (channelData[sample] < 0) 
-                        {
-                            outputSample = -1;
-                        }
-                    }
-                    channelData[sample] = outputSample;
+                        channelData[sample] = outputSample;
                 }
                 // Broken Soft Clip
                 else if (distortionType == 2)
