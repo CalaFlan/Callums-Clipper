@@ -58,6 +58,7 @@ public:
     float outputGain;
     float threshold;
     int distortionType = 0;
+    int distortionTypeMaxValue=3;
     bool bypassEnabled;
 
     float getRmsValue(const int channel) const;

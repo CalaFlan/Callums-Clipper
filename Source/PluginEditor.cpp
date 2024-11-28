@@ -65,6 +65,14 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
     OutputVolume.addListener(this);
 
     // Type buttons
+    DistortionType.setBounds(35, 250, 300, 30);
+    DistortionType.setFont(juce::Font(16.0f, juce::Font::bold));
+    DistortionType.setText("Test", juce::dontSendNotification);
+    DistortionType.setJustificationType(juce::Justification::centred);
+    DistortionType.setColour(juce::Label::ColourIds::backgroundColourId, juce::Colours::grey);
+    addAndMakeVisible(DistortionType);
+
+
     TypeDecrementButton.setButtonText("<");
     TypeDecrementButton.setBounds(30, 250, 30, 30);
     addAndMakeVisible(&TypeDecrementButton);
@@ -73,10 +81,6 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
         decrementDistortionType();
     };
 
-    DistortionType.setBounds(160, 240, 60, 60);
-    DistortionType.setFont(juce::Font(16.0f, juce::Font::bold));
-    DistortionType.setText("Test", juce::dontSendNotification);
-    addAndMakeVisible(DistortionType);
 
     TypeIncrementButton.setButtonText(">");
     TypeIncrementButton.setBounds(310, 250, 30, 30);
@@ -144,12 +148,31 @@ void BasicClippingAudioProcessorEditor::timerCallback()
 
 void BasicClippingAudioProcessorEditor::incrementDistortionType()
 {
-    audioProcessor.distortionType++;
-    DistortionType.setText("Increment", juce::dontSendNotification);
+    if (audioProcessor.distortionType != audioProcessor.distortionTypeMaxValue )
+    {
+        audioProcessor.distortionType++;
+
+    }
+    else
+    {
+        audioProcessor.distortionType = 0;
+    }
+    DistortionType.setText(std::to_string(audioProcessor.distortionType), juce::sendNotification);
+
 }
 
 void BasicClippingAudioProcessorEditor::decrementDistortionType()
 {
-    audioProcessor.distortionType--;
-    DistortionType.setText("Decrment", juce::dontSendNotification);
+    if (audioProcessor.distortionType != 0) 
+    {
+        audioProcessor.distortionType--;
+
+    }
+    else
+    {
+        audioProcessor.distortionType = audioProcessor.distortionTypeMaxValue;
+    }
+
+    DistortionType.setText(std::to_string(audioProcessor.distortionType), juce::sendNotification);
+ 
 }
