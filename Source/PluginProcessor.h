@@ -11,9 +11,6 @@
 #include <JuceHeader.h>
 
 //==============================================================================
-/**
-* testing commiting changes to github
-*/
 class BasicClippingAudioProcessor  : public juce::AudioProcessor
 {
 public:
@@ -60,7 +57,7 @@ public:
     float inputGain;
     float outputGain;
     float threshold;
-    int distortionType = 3;
+    int distortionType = 0;
     bool bypassEnabled;
 
     float getRmsValue(const int channel) const;

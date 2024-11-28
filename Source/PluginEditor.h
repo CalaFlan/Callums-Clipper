@@ -30,7 +30,8 @@ public:
 
 private:
     void sliderValueChanged(juce::Slider* slider) override; // [3]
-
+    void incrementDistortionType();
+    void decrementDistortionType();
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     BasicClippingAudioProcessor& audioProcessor;
@@ -38,11 +39,13 @@ private:
     juce::Slider OutputVolume;
     juce::Slider ThresholdSlider;
     juce::ToggleButton BypassToggle; 
+    juce::Label DistortionType;
 
     // button
     juce::TextButton TypeIncrementButton;
     juce::TextButton TypeDecrementButton;
     // Metering
+
     Gui::VerticalMeter verticalMeterL, verticalMeterR;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicClippingAudioProcessorEditor)

@@ -8,6 +8,7 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include <iostream>
 
 
 //==============================================================================
@@ -67,11 +68,25 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
     TypeDecrementButton.setButtonText("<");
     TypeDecrementButton.setBounds(30, 250, 30, 30);
     addAndMakeVisible(&TypeDecrementButton);
+    TypeDecrementButton.onClick = [&]()
+    {
+        decrementDistortionType();
+    };
 
+    DistortionType.setBounds(160, 240, 60, 60);
+    DistortionType.setFont(juce::Font(16.0f, juce::Font::bold));
+    DistortionType.setText("Test", juce::dontSendNotification);
+    addAndMakeVisible(DistortionType);
 
     TypeIncrementButton.setButtonText(">");
     TypeIncrementButton.setBounds(310, 250, 30, 30);
     addAndMakeVisible(&TypeIncrementButton);
+    TypeIncrementButton.onClick = [&]() 
+    {
+        incrementDistortionType();
+    };
+
+    //
 
 
     // Metering
@@ -125,4 +140,16 @@ void BasicClippingAudioProcessorEditor::timerCallback()
 
     verticalMeterL.repaint();
     verticalMeterR.repaint();
+}
+
+void BasicClippingAudioProcessorEditor::incrementDistortionType()
+{
+    audioProcessor.distortionType++;
+    DistortionType.setText("Increment", juce::dontSendNotification);
+}
+
+void BasicClippingAudioProcessorEditor::decrementDistortionType()
+{
+    audioProcessor.distortionType--;
+    DistortionType.setText("Decrment", juce::dontSendNotification);
 }

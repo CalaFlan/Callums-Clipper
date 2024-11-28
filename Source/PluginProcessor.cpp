@@ -173,7 +173,6 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
     // interleaved by keeping the same state.
 
     // Selector
-    distortionType = 1;
     float outputSample;
 
     // Bypass
