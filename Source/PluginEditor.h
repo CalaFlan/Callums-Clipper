@@ -38,6 +38,8 @@ private:
     juce::Slider InputVolume;
     juce::Slider OutputVolume;
     juce::Slider ThresholdSlider;
+    juce::Slider MixSlider;
+
     juce::ToggleButton BypassToggle; 
     juce::Label DistortionType;
 

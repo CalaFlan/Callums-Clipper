@@ -17,7 +17,7 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
 {
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
-    setSize (600, 300);
+    setSize (600, 330);
 
     // Input Volume
     InputVolume.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag); //LinearVertical
@@ -39,7 +39,6 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
     ThresholdSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 150, 20);
     ThresholdSlider.setPopupDisplayEnabled(true, false, this);
     ThresholdSlider.setTextValueSuffix(" Threshold");
-    //ThresholdSlider.setSkewFactorFromMidPoint(.5);
     ThresholdSlider.setValue(.7);
     ThresholdSlider.setBounds(110, 110,150,150);
     ThresholdSlider.setColour(0x1001300, juce::Colours::green); // Set knob Colour
@@ -64,8 +63,23 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
     addAndMakeVisible(&OutputVolume);
     OutputVolume.addListener(this);
 
+    // Mix Volume
+    MixSlider.setSliderStyle(juce::Slider::RotaryHorizontalVerticalDrag); //LinearVertical
+    MixSlider.setRange(0.0, 100.0, 1);
+    MixSlider.setTextBoxStyle(juce::Slider::TextBoxBelow, false, 150, 20);
+    MixSlider.setPopupDisplayEnabled(true, false, this);
+    MixSlider.setTextValueSuffix("% Wet");
+    MixSlider.setValue(100.0);
+    MixSlider.setBounds(310, 110, 150, 150);
+    MixSlider.setColour(0x1001300, juce::Colours::pink); // Set knob Colour
+    MixSlider.setColour(0x1001400, juce::Colours::black); // Set knob Colour
+    MixSlider.setColour(0x1001700, juce::Colours::lightgrey); // Set knob Colour
+    addAndMakeVisible(&MixSlider);
+    MixSlider.addListener(this);
+
+
     // Type buttons
-    DistortionType.setBounds(35, 250, 300, 30);
+    DistortionType.setBounds(35, 270, 300, 30);
     DistortionType.setFont(juce::Font(16.0f, juce::Font::bold));
     DistortionType.setText("Test", juce::dontSendNotification);
     DistortionType.setJustificationType(juce::Justification::centred);
@@ -74,16 +88,15 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
 
 
     TypeDecrementButton.setButtonText("<");
-    TypeDecrementButton.setBounds(30, 250, 30, 30);
+    TypeDecrementButton.setBounds(30, 270, 30, 30);
     addAndMakeVisible(&TypeDecrementButton);
     TypeDecrementButton.onClick = [&]()
     {
         decrementDistortionType();
     };
 
-
     TypeIncrementButton.setButtonText(">");
-    TypeIncrementButton.setBounds(310, 250, 30, 30);
+    TypeIncrementButton.setBounds(310, 270, 30, 30);
     addAndMakeVisible(&TypeIncrementButton);
     TypeIncrementButton.onClick = [&]() 
     {
@@ -151,7 +164,6 @@ void BasicClippingAudioProcessorEditor::incrementDistortionType()
     if (audioProcessor.distortionType != audioProcessor.distortionTypeMaxValue )
     {
         audioProcessor.distortionType++;
-
     }
     else
     {
@@ -166,7 +178,6 @@ void BasicClippingAudioProcessorEditor::decrementDistortionType()
     if (audioProcessor.distortionType != 0) 
     {
         audioProcessor.distortionType--;
-
     }
     else
     {
