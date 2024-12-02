@@ -148,6 +148,7 @@ void BasicClippingAudioProcessorEditor::sliderValueChanged(juce::Slider* slider)
     audioProcessor.inputGain = InputVolume.getValue();
     audioProcessor.threshold = ThresholdSlider.getValue();
     audioProcessor.outputGain = OutputVolume.getValue();
+    audioProcessor.dryWetPercentage = MixSlider.getValue();
 }
 
 void BasicClippingAudioProcessorEditor::timerCallback()

@@ -174,6 +174,7 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
 
     // Selector
     float outputSample;
+    float drySample;
 
     // Bypass
     if (bypassEnabled)
@@ -189,21 +190,14 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                 channelData[sample] = channelData[sample] * inputGain;
 
                 outputSample = channelData[sample];
+                drySample = channelData[sample];
 
                 // Distortion algos
                 // Hard Clip
                 if (distortionType == 0)             // Hard Clip
                 {
-                    if (channelData[sample] >= threshold)
-                    {
-                        channelData[sample] = threshold;
-                    }
-                    else if (channelData[sample] <= 0 - threshold)
-                    {
-                        channelData[sample] = 0 - threshold;
-                    }
+                    channelData[sample] = HardClip(channelData[sample], threshold);
                 }
-
                 // Soft Clip
                 else if (distortionType == 1)
                 {
@@ -242,10 +236,6 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                         channelData[sample] = threshold * 1.5 * (channelData[sample] + (channelData[sample] * channelData[sample] * channelData[sample]) / 3);
                     }
                 }
-
-                //
-                
-
                 // Rectifier
                 else if (distortionType == 3)
                 {
@@ -254,6 +244,8 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
 
                 // Output Gainss
                 channelData[sample] = channelData[sample] * outputGain;
+
+
             }
         }
     }
@@ -298,6 +290,19 @@ float BasicClippingAudioProcessor::getRmsValue(const int channel) const
 
 }
 
+float BasicClippingAudioProcessor::HardClip(float inputSample, float threshold)
+{
+    float outputSample = inputSample;
+    if (inputSample >= threshold)
+    {
+        outputSample = threshold;
+    }
+    else if (inputSample <= 0 - threshold)
+    {
+        outputSample = 0 - threshold;
+    }
+    return outputSample;
+}
 
 //==============================================================================
 // This creates new instances of the plugin..
@@ -305,3 +310,4 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new BasicClippingAudioProcessor();
 }
+
