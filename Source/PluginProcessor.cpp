@@ -192,19 +192,20 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                 outputSample = channelData[sample];
                 drySample = channelData[sample];
 
-                // Distortion algos
-                // Hard Clip
-                if (distortionType == 0)             // Hard Clip
+                // switch between distortion algos
+                switch (distortionType) 
                 {
+                case 0: // Hard Clip 
                     channelData[sample] = HardClip(channelData[sample], threshold);
-                }
-                // Soft Clip
-                else if (distortionType == 1)
-                {
+                    break;
+                
+                case 1: // Soft Clip
                     channelData[sample] = SoftClip(channelData[sample], threshold);
+                    break;
                 }
+
                 // Broken Soft Clip
-                else if (distortionType == 2)
+                if (distortionType == 2)
                 {
                     if (channelData[sample] >= threshold)
                     {
