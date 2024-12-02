@@ -201,28 +201,7 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                 // Soft Clip
                 else if (distortionType == 1)
                 {
-                    double th = 1.0 / 3.0; // threshold for symmetrical soft clipping
-
-                        if (abs(channelData[sample]) < th) {
-                            outputSample = 2 * channelData[sample];
-                        }
-                        else if (abs(channelData[sample]) >= th) {
-                            if (channelData[sample] > 0) {
-                                outputSample = (3 - pow(2 - channelData[sample] * 3, 2)) / 3;
-                            }
-                            else {
-                                outputSample = -(3 -pow(2 - abs(channelData[sample]) * 3, 2)) / 3;
-                            }
-                        }
-                        if (abs(channelData[sample]) > 2 * th) {
-                            if (channelData[sample] > 0) {
-                                outputSample = 1;
-                            }
-                            else {
-                                outputSample = -1;
-                            }
-                        }
-                        channelData[sample] = outputSample;
+                    channelData[sample] = SoftClip(channelData[sample], threshold);
                 }
                 // Broken Soft Clip
                 else if (distortionType == 2)
@@ -289,7 +268,10 @@ float BasicClippingAudioProcessor::getRmsValue(const int channel) const
     return 0.f;
 
 }
+//==============================================================================
+// Algorithms
 
+//hard Clipping
 float BasicClippingAudioProcessor::HardClip(float inputSample, float threshold)
 {
     float outputSample = inputSample;
@@ -301,6 +283,35 @@ float BasicClippingAudioProcessor::HardClip(float inputSample, float threshold)
     {
         outputSample = 0 - threshold;
     }
+    return outputSample;
+}
+
+//Soft Clipping
+float BasicClippingAudioProcessor::SoftClip(float inputSample, float threshold)
+{
+    float outputSample = inputSample;
+    double th = 1.0 / 3.0; // threshold for symmetrical soft clipping
+
+    if (abs(inputSample) < th) {
+        outputSample = 2 * inputSample;
+    }
+    else if (abs(inputSample) >= th) {
+        if (inputSample > 0) {
+            outputSample = (3 - pow(2 - inputSample * 3, 2)) / 3;
+        }
+        else {
+            outputSample = -(3 - pow(2 - abs(inputSample) * 3, 2)) / 3;
+        }
+    }
+    if (abs(inputSample) > 2 * th) {
+        if (inputSample > 0) {
+            outputSample = 1;
+        }
+        else {
+            outputSample = -1;
+        }
+    }
+    outputSample;
     return outputSample;
 }
 
