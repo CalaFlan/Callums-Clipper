@@ -270,7 +270,7 @@ float BasicClippingAudioProcessor::HardClip(float inputSample, float threshold)
     {
         outputSample = threshold;
     }
-    else if (inputSample <= 0 - threshold && Asymmetrystate)
+    else if (inputSample <= 0 - threshold && !Asymmetrystate)
     {
         outputSample = 0 - threshold;
     }
@@ -284,13 +284,21 @@ float BasicClippingAudioProcessor::SoftClip(float inputSample, float threshold)
     double th = 1.0 / 3.0; // threshold for symmetrical soft clipping
 
     if (abs(inputSample) < th) {
-        outputSample = 2 * inputSample;
+        if (inputSample > 0) 
+        {
+            outputSample = 2 * inputSample;
+        }
+        else if (inputSample < 0 && !Asymmetrystate)
+        {
+            outputSample = 2 * inputSample;
+        }
     }
     else if (abs(inputSample) >= th) {
         if (inputSample > 0) {
             outputSample = (3 - pow(2 - inputSample * 3, 2)) / 3;
         }
-        else {
+        else if (!Asymmetrystate)
+        {
             outputSample = -(3 - pow(2 - abs(inputSample) * 3, 2)) / 3;
         }
     }
@@ -298,7 +306,8 @@ float BasicClippingAudioProcessor::SoftClip(float inputSample, float threshold)
         if (inputSample > 0) {
             outputSample = 1;
         }
-        else {
+        else if (!Asymmetrystate)
+        {
             outputSample = -1;
         }
     }
@@ -312,10 +321,11 @@ float BasicClippingAudioProcessor::JaggedClip(float inputSample, float threshold
     {
         outputSample = threshold * 1.5 * (inputSample - (inputSample * inputSample * inputSample) / 3);
     }
-    else if (inputSample <= 0 - threshold)
+    else if (inputSample <= 0 - threshold && !Asymmetrystate)
     {
         outputSample = threshold * 1.5 * (inputSample + (inputSample * inputSample * inputSample) / 3);
     }
+
     return outputSample;
 }
 
