@@ -206,9 +206,10 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                     channelData[sample] = JaggedClip(channelData[sample], threshold);
                     break;
                 case 3:
-                    channelData[sample] = (abs(channelData[sample]) * 2) - (channelData[sample] / 2);
+                    channelData[sample] = Rectifier(channelData[sample], threshold);
                     break;
                 }
+
                 // Output Gainss
                 channelData[sample] = channelData[sample] * outputGain;
 
@@ -314,6 +315,15 @@ float BasicClippingAudioProcessor::JaggedClip(float inputSample, float threshold
     }
     return outputSample;
 }
+
+
+float BasicClippingAudioProcessor::Rectifier(float inputSample, float threshold)
+{
+    float outputSample = inputSample;
+    outputSample = (abs(inputSample) * 2) - (inputSample / 2);
+    return outputSample;
+}
+
 
 //==============================================================================
 // This creates new instances of the plugin..
