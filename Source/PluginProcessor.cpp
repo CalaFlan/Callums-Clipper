@@ -196,23 +196,26 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                 switch (distortionType) 
                 {
                 case 0: // Hard Clip 
-                    channelData[sample] = HardClip(channelData[sample], threshold);
+                    outputSample = HardClip(channelData[sample], threshold);
                     break;
                 case 1: // Soft Clip
-                    channelData[sample] = SoftClip(channelData[sample], threshold);
+                    outputSample = SoftClip(channelData[sample], threshold);
                     break;
                 case 2: // Jagged
-                    channelData[sample] = JaggedClip(channelData[sample], threshold);
+                    outputSample = JaggedClip(channelData[sample], threshold);
                     break;
-                case 3:
-                    channelData[sample] = Rectifier(channelData[sample], threshold);
+                case 3: // Rectifier
+                    outputSample = Rectifier(channelData[sample], threshold);
                     break;
-                case 4:
+                case 4: //
                     break;
                 }
+                
+                // Mix Stage
+                outputSample = (outputSample * dryWetPercentage) + (drySample * (1 - dryWetPercentage));
 
                 // Output Gainss
-                channelData[sample] = channelData[sample] * outputGain;
+                channelData[sample] = outputSample * outputGain;
             }
         }
     }
