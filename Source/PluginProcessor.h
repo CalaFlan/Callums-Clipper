@@ -66,6 +66,7 @@ public:
     int distortionType = 0;
     int distortionTypeMaxValue=3;
     bool bypassEnabled;
+    bool Asymmetrystate = false;
 
     float getRmsValue(const int channel) const;
 

@@ -270,7 +270,7 @@ float BasicClippingAudioProcessor::HardClip(float inputSample, float threshold)
     {
         outputSample = threshold;
     }
-    else if (inputSample <= 0 - threshold)
+    else if (inputSample <= 0 - threshold && Asymmetrystate)
     {
         outputSample = 0 - threshold;
     }

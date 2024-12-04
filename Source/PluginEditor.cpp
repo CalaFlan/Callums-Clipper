@@ -101,14 +101,16 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
         incrementDistortionType();
     };
 
-
     // Asymetry Toggle 
     AsymetryToggle.setBounds(350, 70, 300, 30);
     AsymetryToggle.setButtonText("Asymetry");
     AsymetryToggle.setColour(juce::ToggleButton::ColourIds::tickColourId, juce::Colours::red);
     AsymetryToggle.setColour(juce::ToggleButton::ColourIds::tickDisabledColourId, juce::Colours::blue);
     addAndMakeVisible(AsymetryToggle);
-
+    AsymetryToggle.onClick = [&]()
+    {
+        audioProcessor.Asymmetrystate = AsymetryToggle.getToggleState();
+    };
 
     // Metering
     startTimerHz(24);

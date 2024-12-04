@@ -63,9 +63,9 @@ private:
     //Create a map to allow us to find the distortion types name using the int value DistortionType
     std::map<int, std::string> DistortionNameMap
     {
-        { 0, "HardClip"}, 
-        { 1, "SoftClip" },
-        { 2, "JaggedClip" },
+        { 0, "Hard Clip"}, 
+        { 1, "Soft Clip" },
+        { 2, "Jagged Clip" },
         { 3, "Rectifier" }
     };
 
