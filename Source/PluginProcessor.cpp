@@ -189,6 +189,7 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                 // Input Gain
                 channelData[sample] = channelData[sample] * inputGain;
 
+                // Assign copies for dry wet mix
                 outputSample = channelData[sample];
                 drySample = channelData[sample];
 
@@ -198,30 +199,16 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                 case 0: // Hard Clip 
                     channelData[sample] = HardClip(channelData[sample], threshold);
                     break;
-                
                 case 1: // Soft Clip
                     channelData[sample] = SoftClip(channelData[sample], threshold);
                     break;
+                case 2: // Jagged
+                    channelData[sample] = JaggedClip(channelData[sample], threshold);
+                    break;
+                case 3:
+                    channelData[sample] = (abs(channelData[sample]) * 2) - (channelData[sample] / 2);
+                    break;
                 }
-
-                // Broken Soft Clip
-                if (distortionType == 2)
-                {
-                    if (channelData[sample] >= threshold)
-                    {
-                        channelData[sample] = threshold * 1.5 * (channelData[sample] - (channelData[sample] * channelData[sample] * channelData[sample]) / 3);
-                    }
-                    else if (channelData[sample] <= 0 - threshold)
-                    {
-                        channelData[sample] = threshold * 1.5 * (channelData[sample] + (channelData[sample] * channelData[sample] * channelData[sample]) / 3);
-                    }
-                }
-                // Rectifier
-                else if (distortionType == 3)
-                {
-                    channelData[sample] = (abs(channelData[sample]) * 2) - (channelData[sample]/2);
-                }
-
                 // Output Gainss
                 channelData[sample] = channelData[sample] * outputGain;
 
@@ -312,7 +299,20 @@ float BasicClippingAudioProcessor::SoftClip(float inputSample, float threshold)
             outputSample = -1;
         }
     }
-    outputSample;
+    return outputSample;
+}
+
+float BasicClippingAudioProcessor::JaggedClip(float inputSample, float threshold)
+{
+    float outputSample = inputSample;
+    if (inputSample >= threshold)
+    {
+        outputSample = threshold * 1.5 * (inputSample - (inputSample * inputSample * inputSample) / 3);
+    }
+    else if (inputSample <= 0 - threshold)
+    {
+        outputSample = threshold * 1.5 * (inputSample + (inputSample * inputSample * inputSample) / 3);
+    }
     return outputSample;
 }
 
