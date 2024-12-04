@@ -212,7 +212,6 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                 // Output Gainss
                 channelData[sample] = channelData[sample] * outputGain;
 
-
             }
         }
     }
