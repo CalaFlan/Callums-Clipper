@@ -9,6 +9,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 #include <iostream>
+#include <string>
 
 
 //==============================================================================
@@ -170,7 +171,7 @@ void BasicClippingAudioProcessorEditor::incrementDistortionType()
     {
         audioProcessor.distortionType = 0;
     }
-    DistortionType.setText(std::to_string(audioProcessor.distortionType), juce::sendNotification);
+    DistortionType.setText(FindDistortionNameByIndex(audioProcessor.distortionType), juce::sendNotification);
 
 }
 
@@ -185,6 +186,11 @@ void BasicClippingAudioProcessorEditor::decrementDistortionType()
         audioProcessor.distortionType = audioProcessor.distortionTypeMaxValue;
     }
 
-    DistortionType.setText(std::to_string(audioProcessor.distortionType), juce::sendNotification);
- 
+    DistortionType.setText(FindDistortionNameByIndex(audioProcessor.distortionType), juce::sendNotification);
+}
+
+std::string BasicClippingAudioProcessorEditor::FindDistortionNameByIndex(int index) 
+{
+    // use a map to find the distortion name
+    return DistortionNameMap[index];
 }

@@ -181,7 +181,6 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
     {
         for (int channel = 0; channel < totalNumInputChannels; ++channel)
         {
-
             auto* channelData = buffer.getWritePointer(channel);
             //threshold = .8;
             for (int sample = 0; sample < buffer.getNumSamples(); ++sample)
@@ -208,11 +207,12 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                 case 3:
                     channelData[sample] = Rectifier(channelData[sample], threshold);
                     break;
+                case 4:
+                    break;
                 }
 
                 // Output Gainss
                 channelData[sample] = channelData[sample] * outputGain;
-
             }
         }
     }

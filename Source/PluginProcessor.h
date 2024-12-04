@@ -58,7 +58,6 @@ public:
     float JaggedClip(float inputSample, float threshold);
     float Rectifier(float inputSample, float threshold);
 
-
     //==============================================================================
     float inputGain;
     float outputGain;
