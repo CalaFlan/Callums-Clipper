@@ -27,15 +27,17 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
-    void timerCallback() override;
+    void timerCallback() override;     // Timer for RMS Display
 
-    // Timer for RMS Display
+
 
 private:
+    // Functions
     void sliderValueChanged(juce::Slider* slider) override; // [3]
     void incrementDistortionType();
     void decrementDistortionType();
     std::string FindDistortionNameByIndex(int index);
+
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
     BasicClippingAudioProcessor& audioProcessor;
@@ -47,9 +49,13 @@ private:
     juce::ToggleButton BypassToggle; 
     juce::Label DistortionType;
 
-    // button
+    // Toggle Asymetry
+    juce::ToggleButton AsymetryToggle;
+
+    // Selection buttons
     juce::TextButton TypeIncrementButton;
     juce::TextButton TypeDecrementButton;
+
     // Metering
 
     Gui::VerticalMeter verticalMeterL, verticalMeterR;
@@ -62,7 +68,6 @@ private:
         { 2, "JaggedClip" },
         { 3, "Rectifier" }
     };
-
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicClippingAudioProcessorEditor)
 };

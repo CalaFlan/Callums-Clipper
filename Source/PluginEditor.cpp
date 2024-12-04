@@ -45,7 +45,6 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
     ThresholdSlider.setColour(0x1001300, juce::Colours::green); // Set knob Colour
     ThresholdSlider.setColour(0x1001400, juce::Colours::black); // Set knob Colour
     ThresholdSlider.setColour(0x1001700, juce::Colours::lightgrey); // Set knob Colour
-
     addAndMakeVisible(&ThresholdSlider);
     ThresholdSlider.addListener(this);
 
@@ -60,7 +59,6 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
     OutputVolume.setColour(0x1001300, juce::Colours::cadetblue); // Set knob Colour
     OutputVolume.setColour(0x1001400, juce::Colours::black); // Set knob Colour
     OutputVolume.setColour(0x1001700, juce::Colours::lightgrey); // Set knob Colour
-
     addAndMakeVisible(&OutputVolume);
     OutputVolume.addListener(this);
 
@@ -87,7 +85,6 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
     DistortionType.setColour(juce::Label::ColourIds::backgroundColourId, juce::Colours::grey);
     addAndMakeVisible(DistortionType);
 
-
     TypeDecrementButton.setButtonText("<");
     TypeDecrementButton.setBounds(30, 270, 30, 30);
     addAndMakeVisible(&TypeDecrementButton);
@@ -104,7 +101,13 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
         incrementDistortionType();
     };
 
-    //
+
+    // Asymetry Toggle 
+    AsymetryToggle.setBounds(350, 70, 300, 30);
+    AsymetryToggle.setButtonText("Asymetry");
+    AsymetryToggle.setColour(juce::ToggleButton::ColourIds::tickColourId, juce::Colours::red);
+    AsymetryToggle.setColour(juce::ToggleButton::ColourIds::tickDisabledColourId, juce::Colours::blue);
+    addAndMakeVisible(AsymetryToggle);
 
 
     // Metering
