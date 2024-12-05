@@ -214,7 +214,7 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                 // Mix Stage
                 outputSample = (outputSample * dryWetPercentage) + (drySample * (1 - dryWetPercentage));
 
-                // Output Gainss
+                // Output Gain Stage
                 channelData[sample] = outputSample * outputGain;
             }
         }
