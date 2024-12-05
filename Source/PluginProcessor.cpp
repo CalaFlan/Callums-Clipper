@@ -263,7 +263,6 @@ float BasicClippingAudioProcessor::getRmsValue(const int channel) const
 //==============================================================================
 
 // Distortion Algorithms
-
 // hard Clipping
 float BasicClippingAudioProcessor::HardClip(float inputSample, float threshold)
 {

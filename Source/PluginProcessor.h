@@ -51,27 +51,30 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    // for 
     juce::SmoothedValue<float> volume{ 0.0f };
 
     //Define Distortion Alogirthms
     int distortionTypeMaxValue = 4;
-
     float HardClip(float inputSample, float threshold);
     float SoftClip(float inputSample, float threshold);
     float JaggedClip(float inputSample, float threshold);
     float Rectifier(float inputSample, float threshold);
     float GateClip(float inputSample, float threshold);
+    int distortionType = 0;
 
     //==============================================================================
+    // Slider Values
     float inputGain;
     float outputGain;
     float threshold;
     float dryWetPercentage; 
-    int distortionType = 0;
 
+    // Bypass and Asymmetry Button states
     bool bypassEnabled = false;
     bool Asymmetrystate = false;
 
+    // get Rms value, used for metering
     float getRmsValue(const int channel) const;
 
 private:

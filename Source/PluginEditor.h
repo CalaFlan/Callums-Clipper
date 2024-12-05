@@ -32,32 +32,34 @@ public:
 
 
 private:
+    // This reference is provided as a quick way for your editor to
+    // access the processor object that created it. 
+
+    BasicClippingAudioProcessor& audioProcessor;
+
     // Functions
     void sliderValueChanged(juce::Slider* slider) override; // [3]
     void incrementDistortionType();
     void decrementDistortionType();
     std::string FindDistortionNameByIndex(int index);
 
-    // This reference is provided as a quick way for your editor to
-    // access the processor object that created it.
-    BasicClippingAudioProcessor& audioProcessor;
+    
+    // Sliders
     juce::Slider InputVolume;
     juce::Slider OutputVolume;
     juce::Slider ThresholdSlider;
     juce::Slider MixSlider;
 
-    juce::Label DistortionType;
-
     // Toggle Asymetry
     juce::TextButton AsymetryToggle;
     juce::TextButton BypassToggle;
 
-    // Selection buttons
+    // Distortion Selection Buttons
+    juce::Label DistortionType;
     juce::TextButton TypeIncrementButton;
     juce::TextButton TypeDecrementButton;
 
     // Metering
-
     Gui::VerticalMeter verticalMeterL, verticalMeterR;
 
     //Create a map to allow us to find the distortion types name using the int value DistortionType

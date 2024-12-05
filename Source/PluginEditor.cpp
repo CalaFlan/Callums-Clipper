@@ -77,7 +77,8 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
     MixSlider.addListener(this);
 
 
-    // Type buttons
+    // Distortion Type Display 
+    // Distortion Type Text Display
     DistortionType.setBounds(35, 270, 300, 30);
     DistortionType.setFont(juce::Font(16.0f, juce::Font::bold));
     DistortionType.setText("Test", juce::dontSendNotification);
@@ -85,6 +86,7 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
     DistortionType.setColour(juce::Label::ColourIds::backgroundColourId, juce::Colours::grey);
     addAndMakeVisible(DistortionType);
 
+    // Increment Distortion Type
     TypeDecrementButton.setButtonText("<");
     TypeDecrementButton.setBounds(30, 270, 30, 30);
     addAndMakeVisible(&TypeDecrementButton);
@@ -93,6 +95,7 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
         decrementDistortionType();
     };
 
+    // Decrement Distortion Type
     TypeIncrementButton.setButtonText(">");
     TypeIncrementButton.setBounds(310, 270, 30, 30);
     addAndMakeVisible(&TypeIncrementButton);
