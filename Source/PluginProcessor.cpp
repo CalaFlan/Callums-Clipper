@@ -188,7 +188,7 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                 // Input Gain
                 channelData[sample] = channelData[sample] * inputGain;
 
-                // Assign copies for dry wet mix
+                // Assign copies of signal for dry/wet mix
                 outputSample = channelData[sample];
                 drySample = channelData[sample];
 
@@ -207,7 +207,8 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
                 case 3: // Rectifier
                     outputSample = Rectifier(channelData[sample], threshold);
                     break;
-                case 4: //
+                case 4: // Gate Clip
+                    outputSample = GateClip(channelData[sample], threshold);
                     break;
                 }
                 
@@ -260,9 +261,10 @@ float BasicClippingAudioProcessor::getRmsValue(const int channel) const
 
 }
 //==============================================================================
-// Algorithms
 
-//hard Clipping
+// Distortion Algorithms
+
+// hard Clipping
 float BasicClippingAudioProcessor::HardClip(float inputSample, float threshold)
 {
     float outputSample = inputSample;
@@ -276,8 +278,7 @@ float BasicClippingAudioProcessor::HardClip(float inputSample, float threshold)
     }
     return outputSample;
 }
-
-//Soft Clipping
+// Soft Clipping
 float BasicClippingAudioProcessor::SoftClip(float inputSample, float threshold)
 {
     float outputSample = inputSample;
@@ -329,7 +330,6 @@ float BasicClippingAudioProcessor::JaggedClip(float inputSample, float threshold
     return outputSample;
 }
 
-
 float BasicClippingAudioProcessor::Rectifier(float inputSample, float threshold)
 {
     float outputSample = inputSample;
@@ -337,6 +337,20 @@ float BasicClippingAudioProcessor::Rectifier(float inputSample, float threshold)
     return outputSample;
 }
 
+float BasicClippingAudioProcessor::GateClip(float inputSample, float threshold)
+{
+    float outputSample = inputSample; 
+    threshold = 1 - threshold; //invert threshold, so lower number = more distortion, to match other alogrithms
+    if (inputSample > 0 && inputSample < threshold)
+    {
+        outputSample = 0;
+    }
+    else if (inputSample < 0 && inputSample > -threshold && !Asymmetrystate)
+    {
+        outputSample = 0;
+    }
+    return outputSample;
+}
 
 //==============================================================================
 // This creates new instances of the plugin..

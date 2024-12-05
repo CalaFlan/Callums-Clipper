@@ -53,10 +53,14 @@ public:
 
     juce::SmoothedValue<float> volume{ 0.0f };
 
+    //Define Distortion Alogirthms
+    int distortionTypeMaxValue = 4;
+
     float HardClip(float inputSample, float threshold);
     float SoftClip(float inputSample, float threshold);
     float JaggedClip(float inputSample, float threshold);
     float Rectifier(float inputSample, float threshold);
+    float GateClip(float inputSample, float threshold);
 
     //==============================================================================
     float inputGain;
@@ -64,7 +68,7 @@ public:
     float threshold;
     float dryWetPercentage; 
     int distortionType = 0;
-    int distortionTypeMaxValue=3;
+
     bool bypassEnabled;
     bool Asymmetrystate = false;
 

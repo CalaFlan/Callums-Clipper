@@ -66,7 +66,8 @@ private:
         { 0, "Hard Clip"}, 
         { 1, "Soft Clip" },
         { 2, "Jagged Clip" },
-        { 3, "Rectifier" }
+        { 3, "Rectifier" },
+        { 4, "Gate Clip" }
     };
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (BasicClippingAudioProcessorEditor)
