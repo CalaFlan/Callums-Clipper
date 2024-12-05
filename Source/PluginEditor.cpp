@@ -122,7 +122,7 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
     addAndMakeVisible(BypassToggle);
     BypassToggle.onClick = [&]()
     {
-        audioProcessor.Asymmetrystate = BypassToggle.getToggleState();
+        audioProcessor.bypassEnabled = BypassToggle.getToggleState();
     };
 
     // Metering

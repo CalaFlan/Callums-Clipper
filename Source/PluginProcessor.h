@@ -69,7 +69,7 @@ public:
     float dryWetPercentage; 
     int distortionType = 0;
 
-    bool bypassEnabled;
+    bool bypassEnabled = false;
     bool Asymmetrystate = false;
 
     float getRmsValue(const int channel) const;

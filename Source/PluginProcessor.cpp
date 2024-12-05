@@ -177,7 +177,7 @@ void BasicClippingAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
     float drySample;
 
     // Bypass
-    if (bypassEnabled)
+    if (!bypassEnabled)
     {
         for (int channel = 0; channel < totalNumInputChannels; ++channel)
         {
