@@ -81,7 +81,7 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
     // Distortion Type Text Display
     DistortionType.setBounds(35, 270, 300, 30);
     DistortionType.setFont(juce::Font(16.0f, juce::Font::bold));
-    DistortionType.setText("Test", juce::dontSendNotification);
+    DistortionType.setText(FindDistortionNameByIndex(audioProcessor.distortionType), juce::dontSendNotification);
     DistortionType.setJustificationType(juce::Justification::centred);
     DistortionType.setColour(juce::Label::ColourIds::backgroundColourId, juce::Colours::grey);
     addAndMakeVisible(DistortionType);
