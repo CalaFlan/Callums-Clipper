@@ -102,14 +102,27 @@ BasicClippingAudioProcessorEditor::BasicClippingAudioProcessorEditor (BasicClipp
     };
 
     // Asymetry Toggle 
-    AsymetryToggle.setBounds(350, 70, 300, 30);
+    AsymetryToggle.setBounds(360, 70, 90, 25);
     AsymetryToggle.setButtonText("Asymetry");
-    AsymetryToggle.setColour(juce::ToggleButton::ColourIds::tickColourId, juce::Colours::red);
-    AsymetryToggle.setColour(juce::ToggleButton::ColourIds::tickDisabledColourId, juce::Colours::blue);
+    AsymetryToggle.setClickingTogglesState(true);
+    AsymetryToggle.setColour(juce::TextButton::ColourIds::buttonColourId, juce::Colours::darkslategrey);
+    AsymetryToggle.setColour(juce::TextButton::ColourIds::buttonOnColourId, juce::Colours::darkred);
     addAndMakeVisible(AsymetryToggle);
     AsymetryToggle.onClick = [&]()
     {
         audioProcessor.Asymmetrystate = AsymetryToggle.getToggleState();
+    };
+
+    // Bypass Toggle 
+    BypassToggle.setBounds(360, 40, 90, 25);
+    BypassToggle.setButtonText("Bypass");
+    BypassToggle.setClickingTogglesState(true);
+    BypassToggle.setColour(juce::TextButton::ColourIds::buttonColourId, juce::Colours::darkslategrey);
+    BypassToggle.setColour(juce::TextButton::ColourIds::buttonOnColourId, juce::Colours::darkred);
+    addAndMakeVisible(BypassToggle);
+    BypassToggle.onClick = [&]()
+    {
+        audioProcessor.Asymmetrystate = BypassToggle.getToggleState();
     };
 
     // Metering

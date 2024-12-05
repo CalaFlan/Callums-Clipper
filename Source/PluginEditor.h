@@ -46,11 +46,11 @@ private:
     juce::Slider ThresholdSlider;
     juce::Slider MixSlider;
 
-    juce::ToggleButton BypassToggle; 
     juce::Label DistortionType;
 
     // Toggle Asymetry
-    juce::ToggleButton AsymetryToggle;
+    juce::TextButton AsymetryToggle;
+    juce::TextButton BypassToggle;
 
     // Selection buttons
     juce::TextButton TypeIncrementButton;
