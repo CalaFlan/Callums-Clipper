@@ -29,21 +29,6 @@ public:
     void resized() override;
     void timerCallback() override;     // Timer for RMS Display
 
-
-
-private:
-    // This reference is provided as a quick way for your editor to
-    // access the processor object that created it. 
-
-    BasicClippingAudioProcessor& audioProcessor;
-
-    // Functions
-    void sliderValueChanged(juce::Slider* slider) override; // [3]
-    void incrementDistortionType();
-    void decrementDistortionType();
-    std::string FindDistortionNameByIndex(int index);
-
-    
     // Sliders
     juce::Slider InputVolume;
     juce::Slider OutputVolume;
@@ -58,6 +43,18 @@ private:
     juce::Label DistortionType;
     juce::TextButton TypeIncrementButton;
     juce::TextButton TypeDecrementButton;
+
+private:
+    // This reference is provided as a quick way for your editor to
+    // access the processor object that created it. 
+
+    BasicClippingAudioProcessor& audioProcessor;
+
+    // Functions
+    void sliderValueChanged(juce::Slider* slider) override; // [3]
+    void incrementDistortionType();
+    void decrementDistortionType();
+    std::string FindDistortionNameByIndex(int index);
 
     // Metering
     Gui::VerticalMeter verticalMeterL, verticalMeterR;

@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 
+
 //==============================================================================
 class BasicClippingAudioProcessor  : public juce::AudioProcessor
 {
@@ -65,10 +66,10 @@ public:
 
     //==============================================================================
     // Slider Values
-    float inputGain;
-    float outputGain;
-    float threshold;
-    float dryWetPercentage; 
+    float inputGain = 0.f;
+    float outputGain = 0.f;
+    float threshold = 0.f;
+    float dryWetPercentage = 0.f; 
 
     // Bypass and Asymmetry Button states
     bool bypassEnabled = false;
@@ -77,6 +78,9 @@ public:
     // get Rms value, used for metering
     float getRmsValue(const int channel) const;
 
+    // dsp
+    void process(dsp::ProcessContextReplacing<float> context);
+    void updateParameters();
 private:
     //==============================================================================
     LinearSmoothedValue <float> rmsLevelLeft, rmsLevelRight;
