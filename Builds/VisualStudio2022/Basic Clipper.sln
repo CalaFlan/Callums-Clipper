@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio Version 17
+
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Basic Clipper - Standalone Plugin", "Basic Clipper_StandalonePlugin.vcxproj", "{FB41C2AD-6F77-110E-A352-0825EE0F3E52}"
+	ProjectSection(ProjectDependencies) = postProject
+		{49F6DE8E-405E-837D-79F6-D1A7575D85AD} = {49F6DE8E-405E-837D-79F6-D1A7575D85AD}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Basic Clipper - VST3", "Basic Clipper_VST3.vcxproj", "{168EA1AD-166F-4F08-661A-9DC75335BB8E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{49F6DE8E-405E-837D-79F6-D1A7575D85AD} = {49F6DE8E-405E-837D-79F6-D1A7575D85AD}
+		{0E0D84A0-0F56-380E-4274-02C5F54FC699} = {0E0D84A0-0F56-380E-4274-02C5F54FC699}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Basic Clipper - Shared Code", "Basic Clipper_SharedCode.vcxproj", "{49F6DE8E-405E-837D-79F6-D1A7575D85AD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Basic Clipper - VST3 Manifest Helper", "Basic Clipper_VST3ManifestHelper.vcxproj", "{0E0D84A0-0F56-380E-4274-02C5F54FC699}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{168EA1AD-166F-4F08-661A-9DC75335BB8E}.Debug|x64.ActiveCfg = Debug|x64
+		{168EA1AD-166F-4F08-661A-9DC75335BB8E}.Debug|x64.Build.0 = Debug|x64
+		{168EA1AD-166F-4F08-661A-9DC75335BB8E}.Release|x64.ActiveCfg = Release|x64
+		{168EA1AD-166F-4F08-661A-9DC75335BB8E}.Release|x64.Build.0 = Release|x64
+		{FB41C2AD-6F77-110E-A352-0825EE0F3E52}.Debug|x64.ActiveCfg = Debug|x64
+		{FB41C2AD-6F77-110E-A352-0825EE0F3E52}.Debug|x64.Build.0 = Debug|x64
+		{FB41C2AD-6F77-110E-A352-0825EE0F3E52}.Release|x64.ActiveCfg = Release|x64
+		{FB41C2AD-6F77-110E-A352-0825EE0F3E52}.Release|x64.Build.0 = Release|x64
+		{49F6DE8E-405E-837D-79F6-D1A7575D85AD}.Debug|x64.ActiveCfg = Debug|x64
+		{49F6DE8E-405E-837D-79F6-D1A7575D85AD}.Debug|x64.Build.0 = Debug|x64
+		{49F6DE8E-405E-837D-79F6-D1A7575D85AD}.Release|x64.ActiveCfg = Release|x64
+		{49F6DE8E-405E-837D-79F6-D1A7575D85AD}.Release|x64.Build.0 = Release|x64
+		{0E0D84A0-0F56-380E-4274-02C5F54FC699}.Debug|x64.ActiveCfg = Debug|x64
+		{0E0D84A0-0F56-380E-4274-02C5F54FC699}.Debug|x64.Build.0 = Debug|x64
+		{0E0D84A0-0F56-380E-4274-02C5F54FC699}.Release|x64.ActiveCfg = Release|x64
+		{0E0D84A0-0F56-380E-4274-02C5F54FC699}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

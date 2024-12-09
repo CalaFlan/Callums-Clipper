@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="Njfnrz" name="Basic Clipping" projectType="audioplug" useAppConfig="0"
-              jucerFormatVersion="1">
-  <MAINGROUP id="ymjx9T" name="Basic Clipping">
+<JUCERPROJECT id="Njfnrz" name="Basic Clipper" projectType="audioplug" useAppConfig="0"
+              jucerFormatVersion="1" companyName="CalFlan">
+  <MAINGROUP id="ymjx9T" name="Basic Clipper">
     <GROUP id="{7558D9C5-FDB4-0437-FC36-F8F054FB26D1}" name="Source">
       <GROUP id="{19765D76-0B38-8046-1029-A03325CEFF90}" name="Component">
         <FILE id="oEt43T" name="VerticalMeter.h" compile="0" resource="0" file="Source/VerticalMeter.h"/>

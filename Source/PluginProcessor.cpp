@@ -99,7 +99,10 @@ void BasicClippingAudioProcessor::prepareToPlay (double sampleRate, int samplesP
     dsp::ProcessSpec spec;
     spec.sampleRate = sampleRate;
     spec.maximumBlockSize = samplesPerBlock;
-    spec.numChannels = getTotalNumOutputChannels();
+    spec.numChannels = getMainBusNumOutputChannels();
+
+    StateVariableFilter.reset();
+    StateVariableFilter.prepare(spec);
 
     // initialise variables properly
     float inputGain = 0.f;
@@ -115,6 +118,7 @@ void BasicClippingAudioProcessor::prepareToPlay (double sampleRate, int samplesP
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
 }
+
 
 void BasicClippingAudioProcessor::releaseResources()
 {
@@ -148,21 +152,18 @@ bool BasicClippingAudioProcessor::isBusesLayoutSupported (const BusesLayout& lay
 }
 #endif
 
-
-
 // DSP Process Function
 void BasicClippingAudioProcessor::updateParameters()
+{
+}
+
+void BasicClippingAudioProcessor::updateFilter()
 {
 
 }
 
 void BasicClippingAudioProcessor::process(dsp::ProcessContextReplacing<float> context)
 {
-    // 
-    dsp::FFT::FFT(3);
-
-
-
 
 }
 
@@ -356,8 +357,9 @@ float BasicClippingAudioProcessor::JaggedClip(float inputSample, float threshold
 float BasicClippingAudioProcessor::Rectifier(float inputSample, float threshold)
 {
     float outputSample = inputSample;
-    outputSample = (abs(inputSample) * 2) - (inputSample / 2);
+    outputSample = (abs(inputSample) - .5);
     return outputSample;
+
 }
 
 float BasicClippingAudioProcessor::GateClip(float inputSample, float threshold)

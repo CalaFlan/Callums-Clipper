@@ -79,7 +79,10 @@ public:
     float getRmsValue(const int channel) const;
 
     // dsp
+    dsp::ProcessorDuplicator<dsp::StateVariableFilter::Filter<float>, 
+        dsp::StateVariableFilter::Parameters<float>> StateVariableFilter;
     void process(dsp::ProcessContextReplacing<float> context);
+    void updateFilter();
     void updateParameters();
 private:
     //==============================================================================
