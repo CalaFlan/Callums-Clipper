@@ -16,9 +16,9 @@ BEGIN
     BLOCK "040904E4"
     BEGIN
       VALUE "CompanyName",  "CalFlan\0"
-      VALUE "FileDescription",  "Basic Clipper\0"
+      VALUE "FileDescription",  "Callum's Clipper\0"
       VALUE "FileVersion",  "1.0.0\0"
-      VALUE "ProductName",  "Basic Clipper\0"
+      VALUE "ProductName",  "Callum's Clipper\0"
       VALUE "ProductVersion",  "1.0.0\0"
     END
   END
