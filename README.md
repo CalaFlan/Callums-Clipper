@@ -11,3 +11,5 @@ If you would just like the VST without needing to build it yourself, you can dow
 If you want to talk about the project for any reason, you can contact me on [LinkedIn](https://www.linkedin.com/in/callum-flanagan/) or [BlueSky](@calflan.bsky.social)
 
 also here's my [website and portfolio](Callumflanagan.com)
+
+I'm placing my code under Creative Commons Zero v1.0 Universal License (CC0-1.0), But do remember that this uses JUCE's framework which is covered by a different license so remember to read and abide by [JUCE's Licensing](https://juce.com/get-juce/) before releasing anything especially if you plan on selling it.
